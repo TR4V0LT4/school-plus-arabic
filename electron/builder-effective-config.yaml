@@ -1,0 +1,14 @@
+directories:
+  output: electron
+  buildResources: build
+appId: com.example.myapp
+productName: MyApp
+files:
+  - filter:
+      - dist/**/*
+      - electron/**/*
+win:
+  target:
+    - nsis
+  icon: electron/icon.png
+electronVersion: 39.1.1

@@ -1,6 +1,7 @@
 import { Home, FileText, Users, MessageSquare, BarChart3, Settings, LogOut } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
+import {  SidebarTrigger } from "@/components/ui/sidebar";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   Sidebar,
@@ -27,7 +28,11 @@ const menuItems = [
   { title: "الإعدادات", url: "/settings", icon: Settings },
 ];
 
-export function AppSidebar() {
+interface AppSidebarProps {
+  className?: string;
+}
+
+export function AppSidebar({ className }: AppSidebarProps) {
   const { state } = useSidebar();
   const location = useLocation();
   const { signOut } = useAuth();
@@ -35,11 +40,12 @@ export function AppSidebar() {
   const isCollapsed = state === "collapsed";
 
   return (
-    <Sidebar>
+    <Sidebar className={`${className} ${isCollapsed ? 'w-16' : 'w-72'} transition-all`}>
       <SidebarHeader className="border-b border-sidebar-border p-4">
         <div className="flex items-center gap-3">
           <div className="rounded-lg bg-primary/10 p-2">
             <GraduationCap className="h-6 w-6 text-primary" />
+            <SidebarTrigger className="absolute top-4 right-4  hover:bg-primary/40"/>
           </div>
           {!isCollapsed && (
             <div>
@@ -52,18 +58,25 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>القائمة الرئيسية</SidebarGroupLabel>
+            <SidebarGroupLabel
+            className={`transition-all ${isCollapsed ? 'opacity-0' : 'opacity-100'} hover:opacity-0`}
+          >
+            القائمة الرئيسية
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem
+                  key={item.title}
+                  className={`${isCollapsed ? ' pr-1 h-8 ' : ''}`}
+                  >
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={item.url}
                       className="hover:bg-sidebar-accent transition-smooth"
                       activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-semibold"
                     >
-                      <item.icon className="h-5 w-5 ml-3" />
+                      <item.icon className="h-8 w-8  " />
                       {!isCollapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
