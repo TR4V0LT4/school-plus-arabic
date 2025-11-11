@@ -70,7 +70,7 @@ const AddStudent = () => {
   };
 
   return (
-    <div className="max-w-4xl space-y-6">
+    <div className="w-full space-y-6">
       <div className="flex items-center">
         <Button variant="ghost" onClick={() => navigate("/students")}>
           <ArrowRight className="ml-2 h-4 w-4" />

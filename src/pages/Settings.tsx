@@ -100,7 +100,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl">
+    <div className="space-y-6 ">
       <div>
         <h1 className="text-3xl font-bold text-foreground mb-2">الإعدادات</h1>
         <p className="text-muted-foreground">إدارة الحساب والإعدادات الشخصية</p>

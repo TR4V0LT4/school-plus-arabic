@@ -16,6 +16,7 @@ export function ThemeToggle() {
   }
 
   return (
+    <div>
     <Button
       variant="ghost"
       size="icon"
@@ -27,7 +28,7 @@ export function ThemeToggle() {
       ) : (
         <Sun className="h-5 w-5" />
       )}
-      <span className="sr-only">تبديل الوضع</span>
     </Button>
+  </div>
   );
 }

@@ -34,6 +34,7 @@ const Students = () => {
   const [filterLevel, setFilterLevel] = useState<string>("all");
   const [filterClass, setFilterClass] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("active");
+  
 
   useEffect(() => {
     if (user) {
