@@ -14,6 +14,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      absences: {
+        Row: {
+          absence_date: string
+          absence_type: string | null
+          created_at: string | null
+          id: string
+          reason: string | null
+          recorded_by: string
+          student_id: string
+        }
+        Insert: {
+          absence_date: string
+          absence_type?: string | null
+          created_at?: string | null
+          id?: string
+          reason?: string | null
+          recorded_by: string
+          student_id: string
+        }
+        Update: {
+          absence_date?: string
+          absence_type?: string | null
+          created_at?: string | null
+          id?: string
+          reason?: string | null
+          recorded_by?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "absences_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       case_files: {
         Row: {
           case_type: Database["public"]["Enums"]["case_type"]
@@ -133,6 +171,39 @@ export type Database = {
           },
         ]
       }
+      notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          message: string
+          related_id: string | null
+          title: string
+          type: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message: string
+          related_id?: string | null
+          title: string
+          type?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          related_id?: string | null
+          title?: string
+          type?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -217,6 +288,107 @@ export type Database = {
           },
         ]
       }
+      student_files: {
+        Row: {
+          file_name: string
+          file_path: string
+          file_size: number | null
+          file_type: string | null
+          id: string
+          student_id: string
+          uploaded_at: string | null
+          uploaded_by: string
+        }
+        Insert: {
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          student_id: string
+          uploaded_at?: string | null
+          uploaded_by: string
+        }
+        Update: {
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          student_id?: string
+          uploaded_at?: string | null
+          uploaded_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_files_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      students: {
+        Row: {
+          address: string | null
+          class_name: string | null
+          created_at: string | null
+          created_by: string
+          date_of_birth: string | null
+          department: string | null
+          enrollment_date: string | null
+          id: string
+          notes: string | null
+          parent_email: string | null
+          parent_name: string | null
+          parent_phone: string | null
+          school_level: Database["public"]["Enums"]["school_level"]
+          status: string | null
+          student_code: string
+          student_name: string
+          updated_at: string | null
+        }
+        Insert: {
+          address?: string | null
+          class_name?: string | null
+          created_at?: string | null
+          created_by: string
+          date_of_birth?: string | null
+          department?: string | null
+          enrollment_date?: string | null
+          id?: string
+          notes?: string | null
+          parent_email?: string | null
+          parent_name?: string | null
+          parent_phone?: string | null
+          school_level: Database["public"]["Enums"]["school_level"]
+          status?: string | null
+          student_code: string
+          student_name: string
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string | null
+          class_name?: string | null
+          created_at?: string | null
+          created_by?: string
+          date_of_birth?: string | null
+          department?: string | null
+          enrollment_date?: string | null
+          id?: string
+          notes?: string | null
+          parent_email?: string | null
+          parent_name?: string | null
+          parent_phone?: string | null
+          school_level?: Database["public"]["Enums"]["school_level"]
+          status?: string | null
+          student_code?: string
+          student_name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -251,6 +423,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_notification: {
+        Args: {
+          p_message: string
+          p_related_id?: string
+          p_title: string
+          p_type: string
+          p_user_id: string
+        }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
