@@ -1,4 +1,4 @@
-import { Home, FileText, Calendar, Users, MessageSquare, BarChart3, TrendingUp, Settings, LogOut } from "lucide-react";
+import { Home, FileText, Calendar, Users, MessageSquare, BarChart3, TrendingUp, Settings, LogOut, CheckSquare } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -27,6 +27,7 @@ import { useEffect, useState } from "react";
 const items = [
   { title: "لوحة القيادة", url: "/dashboard", icon: Home },
   { title: "الطلاب", url: "/students", icon: Users },
+  { title: "الحضور والغياب", url: "/attendance", icon: CheckSquare },
   { title: "ملفات الحالات", url: "/cases", icon: FileText },
   { title: "الجلسات", url: "/sessions", icon: Calendar },
   { title: "التواصل", url: "/communications", icon: MessageSquare },

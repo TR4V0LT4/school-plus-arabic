@@ -52,6 +52,51 @@ export type Database = {
           },
         ]
       }
+      attendance: {
+        Row: {
+          created_at: string | null
+          date: string
+          id: string
+          notes: string | null
+          recorded_by: string
+          status: string
+          student_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          date: string
+          id?: string
+          notes?: string | null
+          recorded_by: string
+          status: string
+          student_id: string
+        }
+        Update: {
+          created_at?: string | null
+          date?: string
+          id?: string
+          notes?: string | null
+          recorded_by?: string
+          status?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_recorded_by_fkey"
+            columns: ["recorded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       case_files: {
         Row: {
           case_type: Database["public"]["Enums"]["case_type"]
@@ -171,6 +216,41 @@ export type Database = {
           },
         ]
       }
+      favorites: {
+        Row: {
+          created_at: string | null
+          id: string
+          item_id: string
+          item_name: string
+          item_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          item_id: string
+          item_name: string
+          item_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          item_id?: string
+          item_name?: string
+          item_type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           created_at: string | null
@@ -206,6 +286,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          class_assigned: string | null
           created_at: string | null
           email: string
           full_name: string
@@ -215,6 +296,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          class_assigned?: string | null
           created_at?: string | null
           email: string
           full_name: string
@@ -224,6 +306,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          class_assigned?: string | null
           created_at?: string | null
           email?: string
           full_name?: string
@@ -388,6 +471,44 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      user_preferences: {
+        Row: {
+          accent_color: string | null
+          created_at: string | null
+          id: string
+          primary_color: string | null
+          theme: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          accent_color?: string | null
+          created_at?: string | null
+          id?: string
+          primary_color?: string | null
+          theme?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          accent_color?: string | null
+          created_at?: string | null
+          id?: string
+          primary_color?: string | null
+          theme?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
