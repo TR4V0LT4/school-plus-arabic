@@ -259,7 +259,8 @@ const StudentFileUpload = () => {
         const { data: { user } } = await supabase.auth.getUser();
 
         const dataToInsert = {
-        ...studentData,
+          ...studentData,
+          school_level: (studentData.school_level || 'primary') as 'primary' | 'middle' | 'high',
           created_by: user.id,
           status: studentData.status || 'active'
         };

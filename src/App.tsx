@@ -18,6 +18,7 @@ import Students from "./pages/Students";
 import StudentDetails from "./pages/StudentDetails";
 import AddStudent from "./pages/AddStudent";
 import Analytics from "./pages/Analytics";
+import Attendance from "./pages/Attendance";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -128,6 +129,16 @@ const App = () => (
                 <ProtectedRoute>
                   <DashboardLayout>
                     <Analytics />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/attendance"
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <Attendance />
                   </DashboardLayout>
                 </ProtectedRoute>
               }
